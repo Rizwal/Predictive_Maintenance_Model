@@ -5,7 +5,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
 
-
 data=pickle.load(open('data.pkl','rb'))
 model=pickle.load(open('model.pkl','rb'))
 
@@ -54,7 +53,6 @@ with tabs[1]:
         return pred
 
     st.title("Predictive Maintainence")
-    name=st.text_input("Enter your name:")
         
     html_temp = """
     <div style="background-color:blue;padding:2px">
@@ -63,14 +61,14 @@ with tabs[1]:
     """
     st.markdown(html_temp,unsafe_allow_html=True)   
 
-    airtemp=st.number_input("Enter Air Temperature in K")
-    proctemp=st.number_input("Enter Process temperature in K")
-    rotspeed=st.number_input("Enter Rotational Speed in rpm",step=1)
-    torque=st.number_input("Enter torque in Nm")
-    toolwear=st.number_input("Enter minimum Tool wear ",step=1)
-    Type_H=st.selectbox("Enter 1 if Product Quality is high(20% of all products)",data['Type_H'].unique())
-    Type_L=st.selectbox("Enter 1 if Product Quality is Low(50% of all products)",data['Type_L'].unique())
-    Type_M=st.selectbox("Enter 1 if Product Quality is medium(30% of all products)",data['Type_M'].unique())
+    airtemp=st.number_input("Enter Air Temperature in K",key='airtemp')
+    proctemp=st.number_input("Enter Process temperature in K",key='proctemp')
+    rotspeed=st.number_input("Enter Rotational Speed in rpm",step=1,key='rotspeed')
+    torque=st.number_input("Enter torque in Nm",key='torque')
+    toolwear=st.number_input("Enter minimum Tool wear ",step=1,key='toolwear')
+    Type_H=st.selectbox("Enter 1 if Product Quality is high(20% of all products)",data['Type_H'].unique(),key='Type_H')
+    Type_L=st.selectbox("Enter 1 if Product Quality is Low(50% of all products)",data['Type_L'].unique(),key='Type_L')
+    Type_M=st.selectbox("Enter 1 if Product Quality is medium(30% of all products)",data['Type_M'].unique(),key='Type_M')
 
     if(st.button("RESULT")):
         result=prediction(airtemp,proctemp,rotspeed,torque,toolwear,Type_H,Type_L,Type_M)
@@ -97,6 +95,31 @@ with tabs[1]:
         elif(result==5):
             st.write('Machine Failure : Yes')
             st.write('Failure Type : Overstrain Failure')
+            
+            
+        user_data = {
+            'Air temperature [K]': airtemp,
+            'Process temperature [K]': proctemp,
+            'Rotational speed [rpm]': rotspeed,
+            'Torque [Nm]': torque,
+            'Tool wear [min]': toolwear,
+            'Type_H': Type_H,
+            'Type_L': Type_L,
+            'Type_M': Type_M,
+            'Failure Type':int(result)
+            
+        }
+        new_data=pd.DataFrame([user_data],columns=['Air temperature [K]', 'Process temperature [K]',
+       'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]', 'Type_H','Type_L','Type_M','Failure Type'])
+        
+        if pd.io.common.file_exists('user_data.csv'):
+            new_data.to_csv('user_data.csv', mode='a', header=False, index=False)
+        else:
+            new_data.to_csv('user_data.csv', mode='w', header=True, index=False)
+    
+        st.success('Data Submitted')
+    
+    
             
 with tabs[2]:
     fig=plt.figure(figsize=(12,12))
