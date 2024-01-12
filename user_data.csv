@@ -1,0 +1,3 @@
+Air temperature [K],Process temperature [K],Rotational speed [rpm],Torque [Nm],Tool wear [min],Type_H,Type_L,Type_M,Failure Type
+231.0,331.0,1231,23.0,1,0,0,1,1
+256.0,331.03999999999996,1231,23.0,23,0,0,1,0
