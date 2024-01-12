@@ -1,4 +1,6 @@
 # Predictive_Maintenance_Model
+![image](https://github.com/Rizwal/Predictive_Maintainence_Model/assets/87907843/2afb5eb5-04fa-4cd4-b0c2-45a9feec2aba)
+
 ## What is Predictive Maintenance?
 Predictive maintenance is a technique that uses data analysis tools and techniques to detect anomalies in your operation and possible defects in equipment and processes so you can fix them before they result in failure.
 
