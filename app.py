@@ -18,7 +18,7 @@ tab_titles=[
 
 tabs=st.tabs(tab_titles)
 with tabs[0]:
-    st.title("PREDICTIVE MAINTAINENCE")
+    st.title("PREDICTIVE MAINTENANCE")
     st.write('Predictive maintenance is a technique that uses data analysis tools and techniques to detect anomalies in your operation and possible defects in equipment and processes so you can fix them before they result in failure')
     st.title("DATASET INFORMATION")
     st.write('The dataset consists of 10 000 data points stored as rows with 14 features in columns')   
