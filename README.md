@@ -12,3 +12,5 @@ Users can provide process parameters to the model like Process Temperature, Rota
 Users can view and infer the performance measures of different machine learning models used.
 Users can gain insights from the data graphs into behaviour of the equipment.
 
+Checkout the web app:
+https://predictivemaintainencemodel.streamlit.app/
